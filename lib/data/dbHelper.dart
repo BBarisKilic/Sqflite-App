@@ -35,7 +35,7 @@ class DbHelper {
     });
   }
 
-  Future<int> insert(Product product) async {
+  Future<void> insert(Product product) async {
     Database db = await this.db;
 
     var result = await db.insert("products", product.toMap());

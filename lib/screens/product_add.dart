@@ -62,12 +62,8 @@ class ProductAddState extends State {
   }
 
   addProduct() async {
-    var result = await dbHelper.insert(Product(textNameController.text,
+    await dbHelper.insert(Product(textNameController.text,
         textDescController.text, double.tryParse(textPriceController.text)));
     Navigator.pop(context, true);
-    /*if (result == 1)
-      
-    else
-      Navigator.pop(context, false);*/
   }
 }
