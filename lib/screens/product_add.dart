@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite_demo/data/dbHelper.dart';
+import 'package:sqflite_demo/models/product.dart';
 
 class ProductAdd extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class ProductAddState extends State {
   TextEditingController textNameController = TextEditingController();
   TextEditingController textDescController = TextEditingController();
   TextEditingController textPriceController = TextEditingController();
+
+  var dbHelper = DbHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class ProductAddState extends State {
             buildNameField(),
             buildDescriptionField(),
             buildUnitPriceFeld(),
+            buildFlatButton(),
           ],
         ),
       ),
@@ -50,5 +55,18 @@ class ProductAddState extends State {
       decoration: InputDecoration(labelText: "Birim fiyatı"),
       controller: textPriceController,
     );
+  }
+
+  Widget buildFlatButton() {
+    return FlatButton(onPressed: addProduct(), child: Text("Kaydet"));
+  }
+
+  addProduct() async {
+    var result = await dbHelper.insert(Product(textNameController.text,
+        textDescController.text, double.tryParse(textPriceController.text)));
+    if (result == 1)
+      Navigator.pop(context, true);
+    else
+      Navigator.pop(context, false);
   }
 }

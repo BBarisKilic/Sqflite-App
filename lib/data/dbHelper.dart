@@ -35,10 +35,11 @@ class DbHelper {
     });
   }
 
-  Future<int> instert(Product product) async {
+  Future<int> insert(Product product) async {
     Database db = await this.db;
 
     var result = await db.insert("products", product.toMap());
+    return result;
   }
 
   Future<int> delete(int id) async {

@@ -18,10 +18,7 @@ class ProductListState extends State {
 
   @override
   void initState() {
-    var productFuture = dbHelper.getProducts();
-    productFuture.then((data) {
-      this.productList = data;
-    });
+    getProducts();
   }
 
   @override
@@ -62,7 +59,17 @@ class ProductListState extends State {
   }
 
   void gotoProductAdd() async {
-    await Navigator.push(
+    bool result = await Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => ProductAdd()));
+
+    if (result) getProducts();
+  }
+
+  void getProducts() async {
+    var productFuture = dbHelper.getProducts();
+    productFuture.then((data) {
+      this.productList = data;
+      productCount = data.length;
+    });
   }
 }

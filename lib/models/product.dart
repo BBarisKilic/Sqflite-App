@@ -16,12 +16,14 @@ class Product {
     if (this.id != null) {
       dbMap["id"] = this.id;
     }
+
+    return dbMap;
   }
 
   Product.fromObject(dynamic o) {
     this.id = int.tryParse(o[id]);
     this.name = o[name];
     this.description = o[description];
-    this.unitPrice = double.tryParse(o[unitPrice]);
+    this.unitPrice = double.tryParse(o[unitPrice].toString());
   }
 }
