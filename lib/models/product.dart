@@ -10,20 +10,20 @@ class Product {
 
   Map<String, dynamic> toMap() {
     var dbMap = Map<String, dynamic>();
-    dbMap["name"] = this.name;
-    dbMap["description"] = this.description;
-    dbMap["unitPrice"] = this.unitPrice;
+    dbMap["name"] = name;
+    dbMap["description"] = description;
+    dbMap["unitPrice"] = unitPrice;
     if (this.id != null) {
-      dbMap["id"] = this.id;
+      dbMap["id"] = id;
     }
 
     return dbMap;
   }
 
   Product.fromObject(dynamic o) {
-    this.id = int.tryParse(o[id]);
-    this.name = o[name];
-    this.description = o[description];
-    this.unitPrice = double.tryParse(o[unitPrice].toString());
+    this.id = o["id"];
+    this.name = o["name"];
+    this.description = o["description"];
+    this.unitPrice = double.tryParse(o["unitPrice"].toString());
   }
 }

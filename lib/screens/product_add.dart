@@ -58,15 +58,16 @@ class ProductAddState extends State {
   }
 
   Widget buildFlatButton() {
-    return FlatButton(onPressed: addProduct(), child: Text("Kaydet"));
+    return FlatButton(onPressed: () => addProduct(), child: Text("Kaydet"));
   }
 
   addProduct() async {
     var result = await dbHelper.insert(Product(textNameController.text,
         textDescController.text, double.tryParse(textPriceController.text)));
-    if (result == 1)
-      Navigator.pop(context, true);
+    Navigator.pop(context, true);
+    /*if (result == 1)
+      
     else
-      Navigator.pop(context, false);
+      Navigator.pop(context, false);*/
   }
 }

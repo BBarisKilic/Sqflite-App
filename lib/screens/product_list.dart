@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:sqflite_demo/data/dbHelper.dart';
 import 'package:sqflite_demo/models/product.dart';
 import 'package:sqflite_demo/screens/product_add.dart';
@@ -19,6 +18,7 @@ class ProductListState extends State {
   @override
   void initState() {
     getProducts();
+    super.initState();
   }
 
   @override
@@ -29,9 +29,7 @@ class ProductListState extends State {
       ),
       body: buildBody(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          gotoProductAdd();
-        },
+        onPressed: () => gotoProductAdd(),
         child: Icon(Icons.add),
         tooltip: "Yeni ürün ekle",
       ),
@@ -58,18 +56,21 @@ class ProductListState extends State {
         });
   }
 
-  void gotoProductAdd() async {
-    bool result = await Navigator.push(
-        this.context, MaterialPageRoute(builder: (context) => ProductAdd()));
-
-    if (result) getProducts();
-  }
-
   void getProducts() async {
     var productFuture = dbHelper.getProducts();
     productFuture.then((data) {
-      this.productList = data;
-      productCount = data.length;
+      setState(() {
+        this.productList = data;
+        productCount = data.length;
+      });
     });
+  }
+
+  void gotoProductAdd() async {
+    bool result = await Navigator.push(
+        this.context, MaterialPageRoute(builder: (context) => ProductAdd()));
+    if (bool != null) {
+      if (result) getProducts();
+    }
   }
 }
