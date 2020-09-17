@@ -71,7 +71,7 @@ class ProductListState extends State {
     bool result = await Navigator.push(
         this.context, MaterialPageRoute(builder: (context) => ProductAdd()));
     if (bool != null) {
-      if (result) getProducts();
+      if (result == true) getProducts();
     }
   }
 
@@ -79,7 +79,7 @@ class ProductListState extends State {
     bool result = await Navigator.push(this.context,
         MaterialPageRoute(builder: (context) => ProductDetail(product)));
     if (bool != null) {
-      if (result) getProducts();
+      if (result == true) getProducts();
     }
   }
 }

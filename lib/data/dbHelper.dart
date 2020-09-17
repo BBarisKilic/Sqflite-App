@@ -53,7 +53,7 @@ class DbHelper {
     Database db = await this.db;
 
     var result = await db.update("products", product.toMap(),
-        where: "id:?", whereArgs: [product.id]);
+        where: "id=?", whereArgs: [product.id]);
     return result;
   }
 }

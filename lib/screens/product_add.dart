@@ -10,9 +10,9 @@ class ProductAdd extends StatefulWidget {
 }
 
 class ProductAddState extends State {
-  TextEditingController textNameController = TextEditingController();
-  TextEditingController textDescController = TextEditingController();
-  TextEditingController textPriceController = TextEditingController();
+  var textNameController = TextEditingController();
+  var textDescController = TextEditingController();
+  var textPriceController = TextEditingController();
 
   var dbHelper = DbHelper();
 

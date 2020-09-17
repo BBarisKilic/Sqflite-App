@@ -18,7 +18,19 @@ class ProductDetailState extends State {
   Product product;
   ProductDetailState(this.product);
 
+  var textNameController = TextEditingController();
+  var textDescController = TextEditingController();
+  var textPriceController = TextEditingController();
+
   var dbHelper = DbHelper();
+
+  @override
+  void initState() {
+    textNameController.text = product.name;
+    textDescController.text = product.description;
+    textPriceController.text = product.unitPrice.toString();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +48,7 @@ class ProductDetailState extends State {
                   ])
         ],
       ),
+      body: buildProductDetail(),
     );
   }
 
@@ -45,7 +58,49 @@ class ProductDetailState extends State {
         await dbHelper.delete(product.id);
         Navigator.pop(context, true);
         break;
+      case Options.update:
+        await dbHelper.update(Product.withId(
+            product.id,
+            textNameController.text,
+            textDescController.text,
+            double.tryParse(textPriceController.text)));
+        Navigator.pop(context, true);
+        break;
       default:
     }
+  }
+
+  Widget buildProductDetail() {
+    return Padding(
+      padding: EdgeInsets.all(30.0),
+      child: Column(
+        children: <Widget>[
+          buildNameField(),
+          buildDescriptionField(),
+          buildUnitPriceFeld(),
+        ],
+      ),
+    );
+  }
+
+  Widget buildNameField() {
+    return TextField(
+      decoration: InputDecoration(labelText: "Ürün adı"),
+      controller: textNameController,
+    );
+  }
+
+  Widget buildDescriptionField() {
+    return TextField(
+      decoration: InputDecoration(labelText: "Ürün açıklaması"),
+      controller: textDescController,
+    );
+  }
+
+  Widget buildUnitPriceFeld() {
+    return TextField(
+      decoration: InputDecoration(labelText: "Birim fiyatı"),
+      controller: textPriceController,
+    );
   }
 }
