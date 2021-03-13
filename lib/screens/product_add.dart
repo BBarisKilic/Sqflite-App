@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite_demo/data/dbHelper.dart';
-import 'package:sqflite_demo/models/product.dart';
+import 'package:sqflite_app/data/dbHelper.dart';
+import 'package:sqflite_app/models/product.dart';
 
 class ProductAdd extends StatefulWidget {
   @override
